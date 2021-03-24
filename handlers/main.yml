@@ -1,0 +1,10 @@
+---
+# handlers file for kafka
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: restart kafka
+  service:
+    name: kafka
+    state: restarted
+    enabled: yes

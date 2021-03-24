@@ -1,0 +1,10 @@
+---
+- name: Config for kafka server.properties
+  template:
+    src: templates/server.properties.j2
+    dest: "{{ kafka_home }}/config/server.properties"
+  notify: restart kafka
+- name: Create log data dir of kafka
+  file:
+    path: "{{ broker_log_dir }}"
+    state: directory

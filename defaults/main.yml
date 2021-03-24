@@ -1,0 +1,8 @@
+---
+# defaults file for kafka
+kafka_version: 2.12-2.3.0
+install_dir: /opt/
+kafka_home: /opt/kafka
+broker_log_dir: /opt/kafka-logs
+java_home: /opt/jdk1.8.0_144/jre
+

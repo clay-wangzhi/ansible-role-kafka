@@ -1,0 +1,25 @@
+---
+- name: Unpack Kafka tarball
+  unarchive:
+    #src: "../files/kafka_{{ kafka_version }}.tgz.gz"
+    src: "kafka_{{ kafka_version }}.tgz.gz"
+    dest: "{{ install_dir }}/"
+    creates: "{{ install_dir }}/kafka_{{ kafka_version }}"
+    copy: yes
+    keep_newer: yes
+    decrypt: no
+
+- name: Make Kafka link
+  file:
+    src: "{{ install_dir }}/kafka_{{ kafka_version }}"
+    dest: "{{ kafka_home }}"
+    state: link
+    force: no
+
+- name: Create systemd unit file kafka.service
+  template:
+    src: kafka.service.j2
+    dest: /usr/lib/systemd/system/kafka.service
+  notify:
+    - reload systemd
+    - restart kafka
